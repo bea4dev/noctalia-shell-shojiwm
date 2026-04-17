@@ -64,11 +64,13 @@ Singleton {
   }
 
   function detectCompositor() {
-    const hyprlandSignature = Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE");
-    const niriSocket = Quickshell.env("NIRI_SOCKET");
-    const swaySock = Quickshell.env("SWAYSOCK");
-    const currentDesktop = Quickshell.env("XDG_CURRENT_DESKTOP");
-    const labwcPid = Quickshell.env("LABWC_PID");
+    const normalizeEnv = value => value == null ? "" : String(value).trim();
+
+    const hyprlandSignature = normalizeEnv(Quickshell.env("HYPRLAND_INSTANCE_SIGNATURE"));
+    const niriSocket = normalizeEnv(Quickshell.env("NIRI_SOCKET"));
+    const swaySock = normalizeEnv(Quickshell.env("SWAYSOCK"));
+    const currentDesktop = normalizeEnv(Quickshell.env("XDG_CURRENT_DESKTOP"));
+    const labwcPid = normalizeEnv(Quickshell.env("LABWC_PID"));
 
     // Check for MangoWC using XDG_CURRENT_DESKTOP environment variable
     // MangoWC sets XDG_CURRENT_DESKTOP=mango
